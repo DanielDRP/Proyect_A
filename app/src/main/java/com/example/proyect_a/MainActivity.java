@@ -4,7 +4,10 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuInflater;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,7 +23,9 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         init();
+
     }
+
 
     public void init(){
         elements = new ArrayList<>();
@@ -48,6 +53,14 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void moveToNote(ListElement item){
-
+        Intent intent = new Intent(this,NoteActivity.class);
+        intent.putExtra("titulo",item.getTitulo());
+        startActivity(intent);
     }
+
+
+
+
+
+
 }
