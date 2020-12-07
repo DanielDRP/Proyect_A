@@ -25,6 +25,15 @@ public class MainActivity extends AppCompatActivity {
     public void init(){
         elements = new ArrayList<>();
         elements.add(new ListElement("Hola","Mi vida"));
+        elements.add(new ListElement("Hola","Mi vida"));
+        elements.add(new ListElement("Hola","Mi vida"));
+        elements.add(new ListElement("Hola","Mi vida"));
+        elements.add(new ListElement("Hola","Mi vida"));
+        elements.add(new ListElement("Hola","Mi vida"));
+        elements.add(new ListElement("Hola","Mi vida"));
+        elements.add(new ListElement("Hola","Mi vida"));
+        elements.add(new ListElement("Hola","Mi vida"));
+        elements.add(new ListElement("Hola","Mi vida"));
 
         ListAdapter listAdapter = new ListAdapter(elements,this);
         RecyclerView recyclerView = findViewById(R.id.lista);
