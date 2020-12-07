@@ -35,10 +35,19 @@ public class MainActivity extends AppCompatActivity {
         elements.add(new ListElement("Hola","Mi vida"));
         elements.add(new ListElement("Hola","Mi vida"));
 
-        ListAdapter listAdapter = new ListAdapter(elements,this);
+        ListAdapter listAdapter = new ListAdapter(elements, this, new ListAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(ListElement item) {
+                moveToNote(item);
+            }
+        });
         RecyclerView recyclerView = findViewById(R.id.lista);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(listAdapter);
+    }
+
+    public void moveToNote(ListElement item){
+
     }
 }
