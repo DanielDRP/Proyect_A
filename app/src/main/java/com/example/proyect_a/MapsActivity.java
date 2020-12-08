@@ -15,6 +15,7 @@ import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
@@ -40,6 +41,16 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         mMap = googleMap;
         cargar_ubicaciones();
 
+        mMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
+            @Override
+            public boolean onMarkerClick(Marker marker) {
+                String titulo = marker.getTitle();
+                Intent intent = new Intent(MapsActivity.this, UpdateNote.class);
+                intent.putExtra("lugar", titulo);
+                startActivity(intent);
+                return false;
+            }
+        });
     }
 
     //Boton para volver al Main
@@ -77,7 +88,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
 
     //Centra la camara en las coordenadas del lugar indicado
-    public void buscar(View view) {
+    public void buscarLugares(View view) {
         //Obtiene la busqueda
         String busqueda = buscarMapsEditText.getText().toString();
 
@@ -109,7 +120,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     }
 
     //Refresca la vista del mapa
-    public void refresh(View view){
+    public void refresh(View view) {
         cargar_ubicaciones();
     }
 }
