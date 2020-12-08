@@ -1,4 +1,8 @@
 <resources>
     <string name="app_name">Proyect_A</string>
     <string name="title_activity_maps">Map</string>
+    <string name="title_activity_Search">Buscar</string>
+    <string name="title_activity_Notes">Nueva nota</string>
+    <string name="title_activity_UpdateNotes">Nota</string>
+    <string name="title_activity_Main">Momento</string>
 </resources>
