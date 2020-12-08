@@ -143,25 +143,16 @@ public class UpdateNote extends AppCompatActivity {
             }
 
         }
-        //Comprueba que el titulo no esté vacio
-        if (!titulo.isEmpty()) {
-
             Nota nota = new Nota(titulo, texto, latitud, longitud, lugar);
             if (updateNoteDatabase(nota) != -1) {
 
-                Toast.makeText(this, "Guardado correctamente", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "Nota Actualizada", Toast.LENGTH_SHORT).show();
 
             } else {
 
-                Toast.makeText(this, "Este titulo ya existe", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "Error al actualizar", Toast.LENGTH_SHORT).show();
 
             }
-
-        } else {
-
-            Toast.makeText(this, "Titule su nota", Toast.LENGTH_SHORT).show();
-
-        }
     }
 
     //Realiza la actualización de la nota en la base de datos

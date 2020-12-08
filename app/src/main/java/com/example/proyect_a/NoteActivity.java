@@ -51,7 +51,7 @@ public class NoteActivity extends AppCompatActivity {
         if (!titulo.isEmpty()) {
             Nota nota = new Nota(titulo, texto, latitud, longitud, lugar);
             if (saveNoteDatabase(nota) != -1) {
-                Toast.makeText(this, "Guardado correctamente", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "Nota guardada", Toast.LENGTH_SHORT).show();
             } else {
                 Toast.makeText(this, "Este titulo ya existe", Toast.LENGTH_SHORT).show();
             }
