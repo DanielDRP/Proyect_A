@@ -44,12 +44,20 @@ public class UpdateNote extends AppCompatActivity {
         String[] buscar = new String[]{titulo};
         Cursor cursor = db.query("notas", campos, "titulo =?", buscar, null, null, null);
         //En caso de que no se haya traido ningun titulo (nueva nota)
+
+
         if(titulo != null){
             //Si exite la nota
             if (cursor.moveToFirst()) {
+                Double lat = cursor.getDouble(1);
+                Double lon = cursor.getDouble(2);
+                if(lat == 0.0 && lon == 0.0){
+                    coordenadasUpdateEditText.setText("");
+                }else{
+                    coordenadasUpdateEditText.setText(lat + "," + lon);
+                }
                 //La cargamos para visualizar
                 tituloUpdateEditText.setText(cursor.getString(0));
-                coordenadasUpdateEditText.setText("" + cursor.getDouble(1) + "," + cursor.getDouble(2));
                 textoUpdateEditText.setText(cursor.getString(4));
                 lugarUpdateEditText.setText(cursor.getString(3));
             }else{
@@ -70,13 +78,16 @@ public class UpdateNote extends AppCompatActivity {
         Matcher matcher = pattern.matcher(coord);
 
         if (lugar.isEmpty()) {
-            lugar = " lugar no asignado";
+            lugar = "Lugar no asignado";
         }
         if (texto.isEmpty()) {
-            texto = "-";
+            texto = "";
+        }
+        if(coord.isEmpty()){
+            coord = "0,0";
         }
         if (!titulo.isEmpty()) {
-            if(matcher.matches() && !coord.isEmpty()){
+            if(matcher.matches() || coord.equals("0,0")){
                 Nota nota = new Nota(titulo, texto, coord, lugar);
                 if (updateNote(nota) != -1) {
                     Toast.makeText(this, "Guardado correctamente", Toast.LENGTH_SHORT).show();

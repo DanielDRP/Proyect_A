@@ -75,18 +75,27 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         }
     }
 
+
+    //Centra la camara en las coordenadas del lugar indicado
     public void buscar(View view) {
+        //Obtiene la busqueda
         String busqueda = buscarMapsEditText.getText().toString();
+
+        //Realiza la busqueda en la base de datos y obtiene los campos
         AdminSQLiteOpenHelper admin = new AdminSQLiteOpenHelper(this, "notas", null, 1);
         SQLiteDatabase db = admin.getWritableDatabase();
         String[] campos = new String[]{"latitud", "longitud"};
         String[] lugar = new String[]{busqueda};
         Cursor cursor = db.query("notas", campos, "lugar =?", lugar, null, null, null);
 
-        if (cursor.moveToFirst()) {
+        //Si existe y no es no asignada
+        if (cursor.moveToFirst() && !busqueda.equals("Lugar no asignado")) {
+            //Obtiene las coordenadas del cursor
             Double lat = cursor.getDouble(0);
             Double lon = cursor.getDouble(1);
+            //Comprueba que no sean las coordenadas por defecto
             if (lat != 0.0 && lon != 0.0) {
+                //Mueve la camara
                 LatLng localiz = new LatLng(lat, lon);
                 mMap.moveCamera(CameraUpdateFactory.newLatLng(localiz));
                 mMap.moveCamera(CameraUpdateFactory.zoomTo(10));
@@ -99,4 +108,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         }
     }
 
+    //Refresca la vista del mapa
+    public void refresh(View view){
+        cargar_ubicaciones();
+    }
 }

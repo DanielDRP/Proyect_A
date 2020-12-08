@@ -43,10 +43,10 @@ public class NoteActivity extends AppCompatActivity {
         Matcher matcher = pattern.matcher(coord);
 
         if (lugar.isEmpty()) {
-            lugar = " lugar no asignado";
+            lugar = "Lugar no asignado";
         }
         if (texto.isEmpty()) {
-            texto = "-";
+            texto = "";
         }
         if(coord.isEmpty()){
             coord = "0,0";
