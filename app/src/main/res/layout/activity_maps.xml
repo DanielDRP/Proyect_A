@@ -62,8 +62,8 @@
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="8dp"
         android:ems="10"
+        android:hint="Busqueda"
         android:inputType="textPersonName"
-        android:text="Name"
         map:layout_constraintBottom_toBottomOf="parent"
         map:layout_constraintEnd_toStartOf="@+id/button7"
         map:layout_constraintStart_toStartOf="parent"
@@ -77,7 +77,7 @@
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:onClick="buscar"
-        android:text="Search"
+        android:text="Buscar"
 
         map:iconTint="#FFFFFF"
         map:layout_constraintBottom_toBottomOf="parent"

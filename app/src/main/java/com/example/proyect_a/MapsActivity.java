@@ -1,7 +1,5 @@
 package com.example.proyect_a;
 
-import androidx.fragment.app.FragmentActivity;
-
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -10,7 +8,8 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.google.android.gms.maps.CameraUpdate;
+import androidx.fragment.app.FragmentActivity;
+
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
@@ -42,17 +41,19 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         cargar_ubicaciones();
 
     }
+
     //Boton para volver al Main
-    public void backToMain(View view){
+    public void backToMain(View view) {
         Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
     }
+
     //Carga todas las ubicaciones validas de la base ded datos al mapa
-    public void cargar_ubicaciones(){
+    public void cargar_ubicaciones() {
         //Busca en la base de datos y trae las coordenadas
         AdminSQLiteOpenHelper admin = new AdminSQLiteOpenHelper(this, "notas", null, 1);
         SQLiteDatabase db = admin.getWritableDatabase();
-        String[] campos = new String[]{"lugar", "latitud","longitud"};
+        String[] campos = new String[]{"lugar", "latitud", "longitud"};
         Cursor cursor = db.query("notas", campos, null, null, null, null, null);
         LatLng localiz = null;
 
@@ -64,11 +65,9 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 double lat = cursor.getDouble(1);
                 double lon = cursor.getDouble(2);
                 //Comprueba que la ubicacion no sea la vacia
-                if(lat != 0 && lon != 0){
+                if (lat != 0 && lon != 0) {
                     localiz = new LatLng(lat, lon);
                     mMap.addMarker(new MarkerOptions().position(localiz).title(lugar));
-                }else{
-                    Toast.makeText(this, "No se han añadido ubicaciones validas", Toast.LENGTH_SHORT).show();
                 }
             } while (cursor.moveToNext());
         } else {
@@ -76,23 +75,28 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         }
     }
 
-    public void buscar(View view){
+    public void buscar(View view) {
         String busqueda = buscarMapsEditText.getText().toString();
         AdminSQLiteOpenHelper admin = new AdminSQLiteOpenHelper(this, "notas", null, 1);
         SQLiteDatabase db = admin.getWritableDatabase();
-        String[] campos = new String[]{"latitud","longitud"};
+        String[] campos = new String[]{"latitud", "longitud"};
         String[] lugar = new String[]{busqueda};
         Cursor cursor = db.query("notas", campos, "lugar =?", lugar, null, null, null);
 
-        if(cursor.moveToFirst()){
-            LatLng localiz = new LatLng(cursor.getDouble(0),cursor.getDouble(1));
-            mMap.moveCamera(CameraUpdateFactory.newLatLng(localiz));
-            mMap.moveCamera(CameraUpdateFactory.zoomTo(10));
-        }else{
+        if (cursor.moveToFirst()) {
+            Double lat = cursor.getDouble(0);
+            Double lon = cursor.getDouble(1);
+            if (lat != 0.0 && lon != 0.0) {
+                LatLng localiz = new LatLng(lat, lon);
+                mMap.moveCamera(CameraUpdateFactory.newLatLng(localiz));
+                mMap.moveCamera(CameraUpdateFactory.zoomTo(10));
+            } else {
+                Toast.makeText(this, "Ubicacion no asignada", Toast.LENGTH_SHORT).show();
+            }
+
+        } else {
             Toast.makeText(this, "No se ha encontrado la ubicación", Toast.LENGTH_SHORT).show();
         }
-
-
-
     }
+
 }

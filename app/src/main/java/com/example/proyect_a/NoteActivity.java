@@ -48,8 +48,11 @@ public class NoteActivity extends AppCompatActivity {
         if (texto.isEmpty()) {
             texto = "-";
         }
+        if(coord.isEmpty()){
+            coord = "0,0";
+        }
         if (!titulo.isEmpty()) {
-            if(matcher.matches() && !coord.isEmpty()){
+            if(matcher.matches() || coord.equals("0,0")){
                 Nota nota = new Nota(titulo, texto, coord, lugar);
                 if (nuevaNota(nota) != -1) {
                     Toast.makeText(this, "Guardado correctamente", Toast.LENGTH_SHORT).show();
