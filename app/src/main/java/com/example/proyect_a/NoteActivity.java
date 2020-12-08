@@ -1,6 +1,7 @@
 package com.example.proyect_a;
 
 import android.content.ContentValues;
+import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.view.View;
@@ -52,6 +53,8 @@ public class NoteActivity extends AppCompatActivity {
             Nota nota = new Nota(titulo, texto, latitud, longitud, lugar);
             if (saveNoteDatabase(nota) != -1) {
                 Toast.makeText(this, "Nota guardada", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(this, MainActivity.class);
+                startActivity(intent);
             } else {
                 Toast.makeText(this, "Este titulo ya existe", Toast.LENGTH_SHORT).show();
             }
