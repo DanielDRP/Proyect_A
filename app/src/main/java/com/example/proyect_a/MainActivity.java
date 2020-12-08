@@ -5,9 +5,12 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
+import android.view.View;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -28,18 +31,14 @@ public class MainActivity extends AppCompatActivity {
 
 
     public void init(){
+        AdminSQLiteOpenHelper admin = new AdminSQLiteOpenHelper(this,"notas",null,1);
+        SQLiteDatabase db = admin.getWritableDatabase();
+        String[] campos = new String[]{"titulo","lugar"};
+        Cursor cursor = db.query("notas", campos, null, null, null, null, null);
         elements = new ArrayList<>();
-        elements.add(new ListElement("Hola","Mi vida"));
-        elements.add(new ListElement("Hola","Mi vida"));
-        elements.add(new ListElement("Hola","Mi vida"));
-        elements.add(new ListElement("Hola","Mi vida"));
-        elements.add(new ListElement("Hola","Mi vida"));
-        elements.add(new ListElement("Hola","Mi vida"));
-        elements.add(new ListElement("Hola","Mi vida"));
-        elements.add(new ListElement("Hola","Mi vida"));
-        elements.add(new ListElement("Hola","Mi vida"));
-        elements.add(new ListElement("Hola","Mi vida"));
-
+        while (cursor.moveToNext()) {
+            elements.add(new ListElement(cursor.getString(0), cursor.getString(1)));
+        }
         ListAdapter listAdapter = new ListAdapter(elements, this, new ListAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(ListElement item) {
@@ -52,9 +51,17 @@ public class MainActivity extends AppCompatActivity {
         recyclerView.setAdapter(listAdapter);
     }
 
+    public void refresh(View view){
+        init();
+    }
+
     public void moveToNote(ListElement item){
         Intent intent = new Intent(this,NoteActivity.class);
         intent.putExtra("titulo",item.getTitulo());
+        startActivity(intent);
+    }
+    public void newNote(View view){
+        Intent intent = new Intent(this,NoteActivity.class);
         startActivity(intent);
     }
 

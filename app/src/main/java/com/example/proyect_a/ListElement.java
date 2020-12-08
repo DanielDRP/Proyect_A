@@ -5,11 +5,11 @@ import java.io.Serializable;
 public class ListElement implements Serializable {
 
     public String titulo;
-    public String Categoria;
+    public String lugar;
 
-    public ListElement(String titulo, String categoria) {
+    public ListElement(String titulo, String lugar) {
         this.titulo = titulo;
-        Categoria = categoria;
+        this.lugar = lugar;
     }
 
     public String getTitulo() {
@@ -20,11 +20,11 @@ public class ListElement implements Serializable {
         this.titulo = titulo;
     }
 
-    public String getCategoria() {
-        return Categoria;
+    public String getLugar() {
+        return lugar;
     }
 
-    public void setCategoria(String categoria) {
-        Categoria = categoria;
+    public void setLugar(String lugar) {
+        this.lugar = lugar;
     }
 }

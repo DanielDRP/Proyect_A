@@ -14,7 +14,7 @@ public class AdminSQLiteOpenHelper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        db.execSQL("create table notas(titulo text primary key,texto text,latitud REAL,longitud REAL,lugar text)");
+        db.execSQL("create table notas(titulo text primary key,latitud REAL,longitud REAL,lugar text,texto text)");
     }
 
     @Override
