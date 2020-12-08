@@ -56,7 +56,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void moveToNote(ListElement item){
-        Intent intent = new Intent(this,NoteActivity.class);
+        Intent intent = new Intent(this,UpdateNote.class);
         intent.putExtra("titulo",item.getTitulo());
         startActivity(intent);
     }

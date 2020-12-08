@@ -27,37 +27,10 @@ public class NoteActivity extends AppCompatActivity {
         textoEditText = findViewById(R.id.textoEditText);
 
 
-        Intent intent = getIntent();
-        String titulo = intent.getStringExtra("titulo");
-        if(titulo != null){
-            mostrarNota(titulo);
-        }
 
 
     }
-    //Muestra la nota seleccionada
-    public void mostrarNota(String titulo){
-        //Traemos de la base de datos la nota seleccionada
-        AdminSQLiteOpenHelper admin = new AdminSQLiteOpenHelper(this, "notas", null, 1);
-        SQLiteDatabase db = admin.getWritableDatabase();
-        String[] campos = new String[]{"titulo", "latitud", "longitud", "lugar","texto"};
-        String[] buscar = new String[]{titulo};
-        Cursor cursor = db.query("notas", campos, "titulo =?", buscar, null, null, null);
-        //En caso de que no se haya traido ningun titulo (nueva nota)
-        if(titulo != null){
-            //Si exite la nota
-            if (cursor.moveToFirst()) {
-                //La cargamos para visualizar
-                tituloEditText.setText(cursor.getString(0));
-                coordenadasEditText.setText("" + cursor.getDouble(1) + "," + cursor.getDouble(2));
-                textoEditText.setText(cursor.getString(4));
-                lugarEditText.setText(cursor.getString(3));
-            }else{
-                Toast.makeText(this,"Error al mostrar la nota", Toast.LENGTH_SHORT);
-            }
-        }
 
-    }
     //Persiste la nota en la base de datos
     public void save(View view) {
         //Obtenemos los datos

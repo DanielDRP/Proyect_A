@@ -12,7 +12,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
-        android:layout_marginEnd="8dp"
+        android:layout_marginEnd="16dp"
         android:backgroundTint="#00FFFFFF"
         android:drawableTint="#00FFFFFF"
         android:ems="10"
@@ -20,27 +20,27 @@
         android:foregroundTint="#00FFFFFF"
         android:hint="Titulo"
         android:inputType="textPersonName"
-        app:layout_constraintEnd_toStartOf="@+id/lugarEditText"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
         android:id="@+id/lugarEditText"
-        android:layout_width="187dp"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
         android:layout_marginEnd="16dp"
         android:backgroundTint="#00FFFFFF"
         android:drawableTint="#00FFFFFF"
         android:ems="10"
         android:foregroundGravity="center_horizontal|fill"
         android:foregroundTint="#00FFFFFF"
-        android:hint="Categoria"
+        android:hint="Lugar"
         android:inputType="textPersonName"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/tituloEditText"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tituloEditText" />
 
     <EditText
         android:id="@+id/coordenadasEditText"
@@ -57,15 +57,16 @@
         android:hint="Coordenadas"
         android:inputType="textPersonName"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tituloEditText" />
+        app:layout_constraintTop_toBottomOf="@+id/lugarEditText" />
 
     <EditText
         android:id="@+id/textoEditText"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
         android:layout_marginBottom="8dp"
         android:backgroundTint="#00FFFFFF"
@@ -73,22 +74,23 @@
         android:gravity="start|top"
         android:hint="Nota"
         android:inputType="textMultiLine"
-        android:paddingBottom="50dp"
+        android:paddingBottom="80dp"
         android:textSize="14sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/coordenadasEditText" />
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/floatingActionButton3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+    <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+        android:id="@+id/saveButton"
+        android:layout_width="113dp"
+        android:layout_height="44dp"
         android:layout_marginEnd="24dp"
         android:layout_marginBottom="24dp"
         android:clickable="true"
         android:onClick="save"
-        app:fabSize="mini"
+        android:text="Guardar"
+        app:fabSize="normal"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:srcCompat="@drawable/ic_done_outline_black_18dp" />
